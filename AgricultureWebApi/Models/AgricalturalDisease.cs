@@ -4,13 +4,12 @@
     {
         public  Guid Id { get; set; }
 
-        public int AgcicultureProductId { get; set; }
+        public int AgriculturalProductId { get; set; }
+        public AgriculturalProduct? AgriculturalProduct { get; set;}
 
-        public AgriculturalProduct? AgciculturalProduct { get; set;}
 
-
-        public int DiseaseId { get; set; }
-        public Disease? Disease { get; set;}
+       public int DiseaseId { get; set; }
+       public Disease? Disease { get; set; }
 
     }
 }

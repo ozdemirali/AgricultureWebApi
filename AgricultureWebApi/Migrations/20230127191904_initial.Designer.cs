@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgricultureWebApi.Migrations
 {
     [DbContext(typeof(AgricultureDbContext))]
-    [Migration("20230125193440_AgriculturalDisease")]
-    partial class AgriculturalDisease
+    [Migration("20230127191904_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,10 +31,7 @@ namespace AgricultureWebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("AgciculturalProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AgcicultureProductId")
+                    b.Property<int>("AgriculturalProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("DiseaseId")
@@ -42,7 +39,7 @@ namespace AgricultureWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgciculturalProductId");
+                    b.HasIndex("AgriculturalProductId");
 
                     b.HasIndex("DiseaseId");
 
@@ -51,14 +48,14 @@ namespace AgricultureWebApi.Migrations
 
             modelBuilder.Entity("AgricultureWebApi.Models.AgricalturalType", b =>
                 {
-                    b.Property<byte>("AgricalturalTypeId")
+                    b.Property<byte>("Id")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("AgricalturalTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("AgricalturalTypes");
                 });
@@ -87,11 +84,11 @@ namespace AgricultureWebApi.Migrations
 
             modelBuilder.Entity("AgricultureWebApi.Models.Disease", b =>
                 {
-                    b.Property<int>("DiseaseId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DiseaseId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<byte>("AgricalturalTypeId")
                         .HasColumnType("tinyint");
@@ -100,26 +97,46 @@ namespace AgricultureWebApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("DiseaseId");
-
-                    b.HasIndex("AgricalturalTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Diseases");
                 });
 
+            modelBuilder.Entity("AgricultureWebApi.Models.Error", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Place")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Errors");
+                });
+
             modelBuilder.Entity("AgricultureWebApi.Models.AgricalturalDisease", b =>
                 {
-                    b.HasOne("AgricultureWebApi.Models.AgriculturalProduct", "AgciculturalProduct")
+                    b.HasOne("AgricultureWebApi.Models.AgriculturalProduct", "AgriculturalProduct")
                         .WithMany("AgricalturalDiseases")
-                        .HasForeignKey("AgciculturalProductId");
+                        .HasForeignKey("AgriculturalProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AgricultureWebApi.Models.Disease", "Disease")
-                        .WithMany("AgriCulturalDiseases")
+                        .WithMany("AgricalturalDisease")
                         .HasForeignKey("DiseaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AgciculturalProduct");
+                    b.Navigation("AgriculturalProduct");
 
                     b.Navigation("Disease");
                 });
@@ -127,18 +144,7 @@ namespace AgricultureWebApi.Migrations
             modelBuilder.Entity("AgricultureWebApi.Models.AgriculturalProduct", b =>
                 {
                     b.HasOne("AgricultureWebApi.Models.AgricalturalType", "AgricalturalType")
-                        .WithMany()
-                        .HasForeignKey("AgricalturalTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AgricalturalType");
-                });
-
-            modelBuilder.Entity("AgricultureWebApi.Models.Disease", b =>
-                {
-                    b.HasOne("AgricultureWebApi.Models.AgricalturalType", "AgricalturalType")
-                        .WithMany("Diseases")
+                        .WithMany("AgriculturalProduct")
                         .HasForeignKey("AgricalturalTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -148,7 +154,7 @@ namespace AgricultureWebApi.Migrations
 
             modelBuilder.Entity("AgricultureWebApi.Models.AgricalturalType", b =>
                 {
-                    b.Navigation("Diseases");
+                    b.Navigation("AgriculturalProduct");
                 });
 
             modelBuilder.Entity("AgricultureWebApi.Models.AgriculturalProduct", b =>
@@ -158,7 +164,7 @@ namespace AgricultureWebApi.Migrations
 
             modelBuilder.Entity("AgricultureWebApi.Models.Disease", b =>
                 {
-                    b.Navigation("AgriCulturalDiseases");
+                    b.Navigation("AgricalturalDisease");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,6 +14,7 @@ namespace AgricultureWebApi.Context
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<AgricalturalDisease> AgricalturalDiseases { get; set; }
         public DbSet<AgriculturalProduct> AgriculturalProduct { get; set; }
+        public DbSet<Error> Errors { get; set; }
 
 
     }
