@@ -17,12 +17,44 @@ namespace AgricultureWebApi.Controllers
             _context = context; 
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    try
+        //    {
+        //        List<ViewModelType> viewModelTypes = new();
+
+        //        foreach (var item in _context.AgricalturalTypes.ToList())
+        //        {
+        //            ViewModelType data = new()
+        //            {
+        //                Id = item.Id,
+        //                Name = item.Name
+        //            };
+
+        //            viewModelTypes.Add(data);
+        //        }
+
+        //        return Ok(viewModelTypes);
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return Ok(e.Message);
+        //    }
+
+
+        //}
+
+
+
+        //Asecron Works
+       [HttpGet]
+        public async Task<IEnumerable<ViewModelType>> Get()
         {
             try
             {
-                List<ViewModelType> viewModelTypes = new();
+                List<ViewModelType> _types = new();
 
                 foreach (var item in _context.AgricalturalTypes.ToList())
                 {
@@ -32,41 +64,26 @@ namespace AgricultureWebApi.Controllers
                         Name = item.Name
                     };
 
-                    viewModelTypes.Add(data);
+                    _types.Add(data);
                 }
 
-                return Ok(viewModelTypes);
+                return _types;
             }
             catch (Exception e)
             {
+                Error error = new()
+                {
+                    Id = Guid.NewGuid(),
+                    Message = e.Message,
+                    Place = "Get Metot form AgriculturalProduct Controller",
+                    Time = DateTime.UtcNow,
+                };
+                _context.Errors.Add(error);
+                await _context.SaveChangesAsync();
 
-                return Ok(e.Message);
+                return Enumerable.Empty<ViewModelType>();
+
             }
-
-            
         }
-
-
-
-        //Asecron Works
-       //[HttpGet]
-       // public async Task<ActionResult<IEnumerable<AgricalturalType>>> GetTypeList()
-       // {
-       //     List<ViewType> viewTypes = new();
-
-       //     foreach (var item in _context.AgricalturalTypes.ToList())
-       //     {
-       //         ViewType data = new()
-       //         {
-       //             Id = item.AgricalturalTypeId,
-       //             Name = item.Name
-       //         };
-
-       //         viewTypes.Add(data);
-       //     }
-
-       //     return await _context.AgricalturalTypes.ToListAsync();
-
-       // }
     }
 }

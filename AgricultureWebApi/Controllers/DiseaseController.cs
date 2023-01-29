@@ -22,7 +22,7 @@ namespace AgricultureWebApi.Controllers
         {
             try
             {
-                List<ViewModelDisease> viewModelDisease = new();
+                List<ViewModelDisease> disease = new();
 
                 foreach (var item in _context.Diseases.ToList())
                 {
@@ -34,10 +34,10 @@ namespace AgricultureWebApi.Controllers
 
                     };
 
-                    viewModelDisease.Add(data);
+                    disease.Add(data);
                 }
 
-                return viewModelDisease;
+                return disease;
             }
             catch (Exception e)
             {
@@ -52,11 +52,7 @@ namespace AgricultureWebApi.Controllers
                 _context.Errors.Add(error);
 
                 await _context.SaveChangesAsync();
-
-
-                //throw new Exception(e.Message);
-
-                throw new NotImplementedException();
+                return Enumerable.Empty<ViewModelDisease>();
             }
         }
 

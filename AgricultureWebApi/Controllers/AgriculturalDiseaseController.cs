@@ -17,7 +17,7 @@ namespace AgricultureWebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ViewModelAgricalturalDisease> InsertData(AgricalturalDisease agriculturalDisease)
+        public async Task<ViewModelAgricalturalDisease> Post(AgricalturalDisease agriculturalDisease)
         {
             try
             {
@@ -45,7 +45,13 @@ namespace AgricultureWebApi.Controllers
 
                 await _context.SaveChangesAsync();
 
-                throw new NotImplementedException();
+                ViewModelAgricalturalDisease _data = new()
+                {
+                    AgriculturalProductId = agriculturalDisease.AgriculturalProductId,
+                    DiseaseId = agriculturalDisease.DiseaseId
+                };
+
+                return _data;
             }
            
         }

@@ -3,6 +3,7 @@ using AgricultureWebApi.Models;
 using AgricultureWebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace AgricultureWebApi.Controllers
 {
@@ -48,7 +49,9 @@ namespace AgricultureWebApi.Controllers
                 };
                 _context.Errors.Add(error);
                 await _context.SaveChangesAsync();
-                throw new NotImplementedException(); 
+
+
+                return Enumerable.Empty<ViewModelAgriculturalProduct>();
             }
           
         }
