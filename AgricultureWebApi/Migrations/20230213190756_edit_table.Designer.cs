@@ -4,6 +4,7 @@ using AgricultureWebApi.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgricultureWebApi.Migrations
 {
     [DbContext(typeof(AgricultureDbContext))]
-    partial class AgricultureDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230213190756_edit_table")]
+    partial class edittable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace AgricultureWebApi.Migrations
 
                     b.HasIndex("DiseaseId");
 
-                    b.ToTable("AgriculturalDiseases");
+                    b.ToTable("AgricalturalDiseases");
                 });
 
             modelBuilder.Entity("AgricultureWebApi.Models.AgriculturalProduct", b =>
@@ -76,7 +79,7 @@ namespace AgricultureWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AgriculturalTypes");
+                    b.ToTable("AgricalturalTypes");
                 });
 
             modelBuilder.Entity("AgricultureWebApi.Models.Disease", b =>

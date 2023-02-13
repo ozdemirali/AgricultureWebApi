@@ -2,7 +2,7 @@
 
 namespace AgricultureWebApi.Models
 {
-    public class AgricalturalType
+    public class AgriculturalType
     {
         public byte Id { get; set; }
 

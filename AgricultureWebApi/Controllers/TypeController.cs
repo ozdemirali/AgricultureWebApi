@@ -56,7 +56,7 @@ namespace AgricultureWebApi.Controllers
             {
                 List<ViewModelType> _types = new();
 
-                foreach (var item in _context.AgricalturalTypes.ToList())
+                foreach (var item in _context.AgriculturalTypes.ToList())
                 {
                     ViewModelType data = new()
                     {

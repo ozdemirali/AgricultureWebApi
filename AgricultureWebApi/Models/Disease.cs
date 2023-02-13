@@ -13,7 +13,7 @@ namespace AgricultureWebApi.Models
         public byte AgricalturalTypeId { get; set; }
      
 
-        public ICollection<AgricalturalDisease>? AgricalturalDisease { get; set; }
+        public ICollection<AgriculturalDisease>? AgricalturalDisease { get; set; }
 
         
     }

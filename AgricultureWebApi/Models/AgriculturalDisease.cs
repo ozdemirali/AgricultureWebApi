@@ -1,6 +1,6 @@
 ﻿namespace AgricultureWebApi.Models
 {
-    public class AgricalturalDisease
+    public class AgriculturalDisease
     {
         public  Guid Id { get; set; }
 

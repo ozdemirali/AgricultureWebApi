@@ -10,9 +10,9 @@ namespace AgricultureWebApi.Context
 
         }
 
-        public DbSet<AgricalturalType> AgricalturalTypes { get; set; }  
+        public DbSet<AgriculturalType> AgriculturalTypes { get; set; }  
         public DbSet<Disease> Diseases { get; set; }
-        public DbSet<AgricalturalDisease> AgricalturalDiseases { get; set; }
+        public DbSet<AgriculturalDisease> AgriculturalDiseases { get; set; }
         public DbSet<AgriculturalProduct> AgriculturalProduct { get; set; }
         public DbSet<Error> Errors { get; set; }
 

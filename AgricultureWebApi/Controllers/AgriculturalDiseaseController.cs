@@ -17,14 +17,14 @@ namespace AgricultureWebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ViewModelAgricalturalDisease> Post(AgricalturalDisease agriculturalDisease)
+        public async Task<ViewModelAgriculturalDisease> Post(AgriculturalDisease agriculturalDisease)
         {
             try
             {
                 agriculturalDisease.Id = Guid.NewGuid();
-                _context.AgricalturalDiseases.Add(agriculturalDisease);
+                _context.AgriculturalDiseases.Add(agriculturalDisease);
                 await _context.SaveChangesAsync();
-                ViewModelAgricalturalDisease data = new()
+                ViewModelAgriculturalDisease data = new()
                 {
                     Id = agriculturalDisease.Id,
                     AgriculturalProductId = agriculturalDisease.AgriculturalProductId,
@@ -45,7 +45,7 @@ namespace AgricultureWebApi.Controllers
 
                 await _context.SaveChangesAsync();
 
-                ViewModelAgricalturalDisease _data = new()
+                ViewModelAgriculturalDisease _data = new()
                 {
                     AgriculturalProductId = agriculturalDisease.AgriculturalProductId,
                     DiseaseId = agriculturalDisease.DiseaseId
