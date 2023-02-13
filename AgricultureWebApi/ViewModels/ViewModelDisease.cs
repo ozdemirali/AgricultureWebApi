@@ -8,6 +8,5 @@ namespace AgricultureWebApi.ViewModels
 
         public string? Name { get; set; }
 
-        public byte AgricalturalTypeId { get; set; }
     }
 }

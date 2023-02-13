@@ -30,8 +30,6 @@ namespace AgricultureWebApi.Controllers
                     {
                         Id = item.Id,
                         Name = item.Name,
-                        AgricalturalTypeId = item.AgricalturalTypeId,
-
                     };
 
                     disease.Add(data);
@@ -56,7 +54,44 @@ namespace AgricultureWebApi.Controllers
             }
         }
 
-        
+
+        [HttpGet("{id}")]
+        public async Task<IEnumerable<ViewModelDisease>> GetById(int id)
+        {
+            try
+            {
+                List<ViewModelDisease> product = new();
+
+                foreach (var item in _context.Diseases.Where(s => s.AgricalturalTypeId==id || s.AgricalturalTypeId == 3).ToList())
+                {
+                    ViewModelDisease data = new()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                    };
+
+                    product.Add(data);
+                }
+
+                return product;
+            }
+            catch (Exception e)
+            {
+                Error error = new()
+                {
+                    Id = Guid.NewGuid(),
+                    Message = e.Message,
+                    Place = "GetById Metot form AgriculturalProduct Controller",
+                    Time = DateTime.UtcNow,
+                };
+                _context.Errors.Add(error);
+                await _context.SaveChangesAsync();
+
+
+                return Enumerable.Empty<ViewModelDisease>();
+            }
+        }
+
         //public IActionResult Index()
         //{
         //    return View();
