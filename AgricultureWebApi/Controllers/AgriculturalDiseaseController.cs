@@ -26,6 +26,7 @@ namespace AgricultureWebApi.Controllers
                 disease.AgriculturalProductId = agriculturalDisease.AgriculturalProductId;
                 disease.DiseaseId = agriculturalDisease.DiseaseId;
                 disease.Not = agriculturalDisease.Not;
+                disease.ImageName = agriculturalDisease.ImageName;
                 _context.AgriculturalDiseases.Add(disease);
                 await _context.SaveChangesAsync();
                 ViewModelAgriculturalDisease data = new()
