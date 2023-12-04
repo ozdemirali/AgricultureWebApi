@@ -1,7 +1,11 @@
 ﻿using AgricultureWebApi.Context;
 using AgricultureWebApi.Models;
+using AgricultureWebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json.Nodes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AgricultureWebApi.Controllers
 {
@@ -21,6 +25,8 @@ namespace AgricultureWebApi.Controllers
         {
             try
             {
+
+
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();
                 //var file = Request.Form.Files[0];
@@ -35,14 +41,14 @@ namespace AgricultureWebApi.Controllers
                     {
                         file.CopyTo(stream);
                     }
-                    return Ok("Ok");
+                    return Ok(new { message = "Ok" ,fileName=fileName}) ;
                 }
                 else
                 {
                     return BadRequest();
                 }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Error error = new()
                 {

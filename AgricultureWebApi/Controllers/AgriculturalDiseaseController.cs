@@ -17,18 +17,23 @@ namespace AgricultureWebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ViewModelAgriculturalDisease> Post(AgriculturalDisease agriculturalDisease)
+        public async Task<ViewModelAgriculturalDisease> Post(ViewModelAgriculturalDisease agriculturalDisease)
         {
             try
-            {
-                agriculturalDisease.Id = Guid.NewGuid();
-                _context.AgriculturalDiseases.Add(agriculturalDisease);
+            {   
+                AgriculturalDisease disease= new AgriculturalDisease();
+                disease.Id = Guid.NewGuid();
+                disease.AgriculturalProductId = agriculturalDisease.AgriculturalProductId;
+                disease.DiseaseId = agriculturalDisease.DiseaseId;
+                disease.Not = agriculturalDisease.Not;
+                _context.AgriculturalDiseases.Add(disease);
                 await _context.SaveChangesAsync();
                 ViewModelAgriculturalDisease data = new()
                 {
-                    Id = agriculturalDisease.Id,
+                    Id = disease.Id,
                     AgriculturalProductId = agriculturalDisease.AgriculturalProductId,
                     DiseaseId = agriculturalDisease.DiseaseId,
+                    Not= agriculturalDisease.Not,
                 };
                 return data;
             }

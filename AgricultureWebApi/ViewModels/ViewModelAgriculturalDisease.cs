@@ -7,5 +7,6 @@ namespace AgricultureWebApi.ViewModels
         public Guid Id { get; set; }
         public int AgriculturalProductId { get; set; }
         public int DiseaseId { get; set; }
+        public String? Not { get; set; }
     }
 }
